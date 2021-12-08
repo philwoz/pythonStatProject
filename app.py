@@ -15,3 +15,11 @@ def fixtures_page():
         {'id': 3, 'home_team': 'Stoke City', 'away_team': 'Man Utd', 'H': '25%', 'D': '30%', 'A':'55%'}
     ]
     return render_template('fixtures.html', games=games)
+
+@app.route('/tables')
+def table_page():
+    return render_template('tables.html')
+
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
