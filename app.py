@@ -1,5 +1,19 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
+db = SQLAlchemy(app)
+
+class Game(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    homeTeam = db.Column(db.String(), nullable=False)
+    awayTeam = db.Column(db.String(), nullable=False)
+    homeProb = db.Column(db.String(), nullable=False)
+    drawProb = db.Column(db.String(), nullable=False)
+    awayProb = db.Column(db.String(), nullable=False)
+
+    def __repr__(self):
+        return f'Game {self.homeTeam}'
 
 
 @app.route('/')
@@ -9,11 +23,7 @@ def home_page():
 
 @app.route('/fixtures')
 def fixtures_page():
-    games = [
-        {'id': 1, 'home_team': 'Man City', 'away_team': 'Everton', 'H': '70%','D': '20%', 'A':'10%'},
-        {'id': 2, 'home_team': 'Chelsea', 'away_team': 'Liverpool', 'H': '65%', 'D': '25%', 'A': '10%'},
-        {'id': 3, 'home_team': 'Stoke City', 'away_team': 'Man Utd', 'H': '25%', 'D': '30%', 'A':'55%'}
-    ]
+    games = Game.query.all()
     return render_template('fixtures.html', games=games)
 
 @app.route('/tables')

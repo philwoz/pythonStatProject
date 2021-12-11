@@ -20,11 +20,11 @@
     <!-- Your rows inside the table HERE: -->
     {% for game in games %}
          <tr>
-        <td> {{ game.home_team }} </td>
-        <td> {{ game.away_team }} </td>
-        <td> {{ game.H }} </td>
-        <td> {{ game.D }} </td>
-        <td> {{ game.A }} </td>
+        <td> {{ game.homeTeam }} </td>
+        <td> {{ game.awayTeam }} </td>
+        <td> {{ game.homeProb }} </td>
+        <td> {{ game.drawProb }} </td>
+        <td> {{ game.awayProb }} </td>
     </tr>
     {% endfor %}
 
